@@ -28,13 +28,13 @@ class Blockchain {
 
             const actualLashHash = chain[i-1].hash
 
-            const { timestamp, lastHash, hash, data } = block
+            const { timestamp, lastHash, hash, data, nonce, difficulty } = block
 
             //current lastHash versus the hash on the last block
             if (lastHash !== actualLashHash) return false
 
             //if one item (data) has been tampered with
-            let validHash = cryptoHash(timestamp, lastHash, data)
+            let validHash = cryptoHash(timestamp, lastHash, data, nonce, difficulty)
 
             if (validHash !== hash) return false
         }
