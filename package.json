@@ -7,9 +7,12 @@
     "test": "jest --watchAll"
   },
   "keywords": [],
-  "author": "",
+  "author": "Richard Anabeto Opoku",
   "license": "ISC",
   "devDependencies": {
-    "jest": "^23.6.0"
+    "jest": "^26.1.0"
+  },
+  "dependencies": {
+    "hex-to-binary": "^1.0.1"
   }
 }

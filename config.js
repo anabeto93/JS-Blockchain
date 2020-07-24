@@ -1,4 +1,4 @@
-const INITIAL_DIFFICULTY = 2
+const INITIAL_DIFFICULTY = 3
 const MINE_RATE = 1000 //milliseconds
 
 const GENESIS_DATA = {

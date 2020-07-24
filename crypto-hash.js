@@ -1,5 +1,7 @@
 const crypto = require('crypto')
 
+const hexToBinary = require('hex-to-binary')
+
 const cryptoHash = (...args) => {
     const hash = crypto.createHash('sha256')
 
@@ -26,4 +28,4 @@ const cryptoHash = (...args) => {
     return hash.digest('hex')
 }
 
-module.exports = cryptoHash;
+module.exports = { cryptoHash, hexToBinary }
