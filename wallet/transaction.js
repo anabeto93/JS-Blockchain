@@ -32,7 +32,7 @@ class Transaction {
 
         const outputTotal = Object.values(outputMap)
         .reduce((total, outputAmout) => total + outputAmout)
-        
+
         if (amount !== outputTotal) {
             console.error(`Invalid transaction from ${address}`)
             return false
@@ -44,6 +44,28 @@ class Transaction {
         }
 
         return true
+    }
+
+    update({ senderWallet, recipient, amount }) {
+        if (amount < 1) {
+            throw new Error("Cannot send negative or zero amount.")
+        }
+
+        if (amount > this.outputMap[senderWallet.publicKey]) {
+            throw new Error("Amount exceeds balance.")
+        }
+
+        if (!this.outputMap[recipient]) {
+            this.outputMap[recipient] = amount
+        } else {
+            this.outputMap[recipient] += amount
+        }
+
+        this.outputMap[senderWallet.publicKey] -= amount
+        
+        this.input = this.createInput({
+            senderWallet, outputMap: this.outputMap
+        })
     }
 }
 
