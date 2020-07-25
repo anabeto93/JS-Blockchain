@@ -8,8 +8,6 @@ app.use(bodyParser.json())
 const blockchain = new Blockchain()
 const pubsub = new PubSub({ blockchain })
 
-pubsub.broadcastChain()
-
 
 app.get('/api/blocks', (req, res) => {
     res.json(blockchain.chain)
@@ -19,6 +17,7 @@ app.post('/api/mine', (req, res) => {
     const { data } = req.body
 
     blockchain.addBlock({ data })
+    pubsub.broadcastChain()
 
     res.json({ message: "Block mined", error_code: 201 })
 })
