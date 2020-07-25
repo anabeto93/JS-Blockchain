@@ -10,6 +10,9 @@
     "start-redis": "",
     "dev-peer": "cross-env GENERATE_PEER_PORT='true' nodemon index.js"
   },
+  "jest": {
+    "testEnvironment": "node"
+  },
   "keywords": [],
   "author": "Richard Anabeto Opoku",
   "license": "ISC",
