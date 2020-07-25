@@ -64,6 +64,29 @@ describe('Blockchain', () => {
                 })
             })
 
+            describe('and the chain contains a block with a jumped difficulty', () => {
+                it('returns false', () => {
+                    const lastBlock = blockchain.chain[blockchain.chain.length -1]
+                    const lastHash = lastBlock.hash
+                    const timestamp = Date.now()
+                    const nonce = 0
+                    const data = {title: "Hack Time", content: "Jumping the difficulty"}
+
+                    const difficulty = lastBlock.difficulty - 3;
+
+                    let hash = cryptoHash(timestamp, lastHash, nonce, data, difficulty)
+
+                    const badBlock = new Block({
+                        timestamp, lastHash, hash, nonce, data, difficulty
+                    })
+
+                    //add the bad block to the chain
+                    blockchain.chain.push(badBlock)
+
+                    expect(Blockchain.isValidChain(blockchain.chain)).toBe(false)
+                })
+            })
+
             describe('and the chain is not tampered with', () => {
                 it('returns true', () => {
                     expect(Blockchain.isValidChain(blockchain.chain)).toBe(true)
