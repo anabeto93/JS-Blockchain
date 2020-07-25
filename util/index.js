@@ -1,4 +1,5 @@
-const { cryptoHash } = require('./crypto-hash')
+const cryptoHash = require('./crypto-hash')
+const hexToBinary = require('hex-to-binary')
 
 const EC = require('elliptic').ec
 
@@ -10,4 +11,4 @@ const verifySignature = ({ publicKey, data, signature }) => {
     return keyFromPublic.verify(cryptoHash(data), signature)
 }
 
-module.exports = { ec, verifySignature }
+module.exports = { ec, verifySignature, cryptoHash, hexToBinary }
